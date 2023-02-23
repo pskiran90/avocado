@@ -2,11 +2,12 @@ import 'package:avocado/screens/profile_page.dart';
 import 'package:avocado/utils/colors.dart';
 import 'package:avocado/widgets/custome_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:pinput/pinput.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/auth_provider.dart';
 import '../utils/utils.dart';
+import 'home_screen.dart';
 
 class OtpScreen extends StatefulWidget {
   final String verificationId;
