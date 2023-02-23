@@ -9,7 +9,8 @@ import 'package:pinput/pinput.dart';
 import '../utils/utils.dart';
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({super.key});
+  final String verificationId;
+  const OtpScreen({super.key, required this.verificationId});
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -84,11 +85,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     text: "Verify",
                     onPressed: () {
                       if (otpCode != null) {
-                        // verifyOtp(context, otpCode!);
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) => const ProfileScreen()),
-                        );
+                        verifyOtp(context, otpCode!);
                       } else {
                         showSnackBar(context, "Enter 6-Digit code");
                       }
@@ -119,5 +116,21 @@ class _OtpScreenState extends State<OtpScreen> {
         ),
       ),
     );
+  }
+
+  void verifyOtp(BuildContext context, String userOtp) {
+    final ap = Provider.of<AuthProvider>(context, listen: false);
+    ap.verifyOtp(
+        context: context,
+        verificationId: widget.verificationId,
+        userOtp: userOtp,
+        onSuccess: () {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HomeScreen(),
+              ),
+              (route) => false);
+        });
   }
 }

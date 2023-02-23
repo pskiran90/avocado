@@ -200,7 +200,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const OtpScreen(),
+                            builder: (context) => OtpScreen(),
                           ),
                         );
                       }),
