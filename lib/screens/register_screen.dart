@@ -3,6 +3,9 @@ import 'package:avocado/utils/colors.dart';
 import 'package:avocado/widgets/custome_button.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/auth_provider.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -196,14 +199,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: AvocadoButton(
-                      text: "Login",
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => OtpScreen(),
-                          ),
-                        );
-                      }),
+                    text: "Login",
+                    onPressed: () => sendOtp(),
+                  ),
                 ),
               ],
             ),
@@ -211,5 +209,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
     );
+  }
+
+  void sendOtp() {
+    final ap = Provider.of<AuthProvider>(context, listen: false);
+
+    String phoneNumber = phoneController.text.trim();
+    ap.signInWithPhone(context, '+${selectedCountry.phoneCode}$phoneNumber');
   }
 }

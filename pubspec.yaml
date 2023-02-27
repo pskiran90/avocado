@@ -35,6 +35,7 @@ dependencies:
   flutter:
     sdk: flutter
   pinput: ^2.2.30
+  provider: ^6.0.5
   rive_splash_screen: ^0.1.1
 
 dev_dependencies:
